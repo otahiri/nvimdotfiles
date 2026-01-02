@@ -1,5 +1,7 @@
 return {
-  -- Disable Ruff completely
+	{
+		"kkoomen/vim-doge",
+	},
   {
     "neovim/nvim-lspconfig",
     opts = {
