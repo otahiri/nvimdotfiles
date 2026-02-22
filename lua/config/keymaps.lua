@@ -1,16 +1,23 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-local function no_arrow()
-	vim.notify("Use h/j/k/l instead!", vim.log.levels.WARN)
+local function formatter()
+	local name = vim.fn.expand("%:e")
+	if name == "py" then
+		vim.cmd("silent! %s/\\t/    /g")
+	end
 end
 
-vim.keymap.set({ "n", "i", "v" }, "<Up>", no_arrow)
-vim.keymap.set({ "n", "i", "v" }, "<Down>", no_arrow)
-vim.keymap.set({ "n", "i", "v" }, "<Left>", no_arrow)
-vim.keymap.set({ "n", "i", "v" }, "<Right>", no_arrow)
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-vim.keymap.set("n", "<leader>nf", ":DogeGenerate<CR>", { desc = "Generate Docstring (Doge)" })
-vim.keymap.set("n", "<leader>t", ":ToggleTerm dir=. direction=vertical size=90<CR>")
+local function header()
+	local name = vim.fn.expand("%:e")
+	if name == "c" then
+		vim.cmd("silent! Stdheader")
+	end
+end
+
+vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>w", ":w<CR>")
-vim.keymap.set("v", "<leader>m", ":norm")
+vim.keymap.set("n", "<leader>q", ":q<CR>")
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+vim.api.nvim_create_autocmd("BufWritePost", {callback = formatter})
+vim.keymap.set("n", "<F1>", header)
