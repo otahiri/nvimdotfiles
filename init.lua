@@ -18,6 +18,7 @@ vim.diagnostic.config({
 })
 vim.opt.undofile = true
 vim.opt.relativenumber = true
+vim.opt.number = true
 -- this line is for the python formatter
 vim.api.nvim_create_user_command("Format", function(args)
 	local range = nil
