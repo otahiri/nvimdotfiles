@@ -1,4 +1,4 @@
-local function formatter()
+local function lint()
 	local name = vim.fn.expand("%:e")
 	if name == "py" then
 		vim.cmd("silent! %s/\\t/    /g")
@@ -12,6 +12,15 @@ local function header()
 	end
 end
 
+local function format()
+	local name = vim.fn.expand("%:e")
+	if name == "c" then
+		vim.cmd("silent! CFormat")
+	elseif name == "py" then
+		vim.cmd("silent! Format")
+	end
+end
+
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
@@ -19,5 +28,18 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
-vim.api.nvim_create_autocmd("BufWritePost", {callback = formatter})
+vim.api.nvim_create_autocmd("BufWritePost", { callback = lint })
 vim.keymap.set("n", "<F1>", header)
+vim.keymap.set("n", "<leader>f", format)
+vim.keymap.set("n", "<leader>e", function ()
+	local explorer = Snacks.picker.get({source = "explorer"})[1]
+	if explorer then
+		if explorer:is_focused() then
+			explorer:close()
+		else
+			explorer: focus()
+		end
+	else
+		Snacks.explorer.reveal()
+	end
+	end)
