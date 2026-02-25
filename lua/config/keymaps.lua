@@ -35,11 +35,7 @@ vim.keymap.set("n", "<leader>f", format)
 vim.keymap.set("n", "<leader>e", function ()
 	local explorer = Snacks.picker.get({source = "explorer"})[1]
 	if explorer then
-		if explorer:is_focused() then
-			explorer:close()
-		else
-			explorer: focus()
-		end
+		explorer:close()
 	else
 		Snacks.explorer.reveal()
 	end
