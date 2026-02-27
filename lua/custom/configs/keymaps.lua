@@ -53,3 +53,27 @@ vim.keymap.set('n', '<leader>cc', vim.lsp.codelens.run)
 vim.keymap.set('n', '<leader>cC', vim.lsp.codelens.refresh)
 vim.keymap.set('n', '<leader>cR', function() Snacks.rename.rename_file() end)
 vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename)
+
+vim.keymap.set({ "x", "o" }, "af", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+end, { desc = "Select outer function" })
+
+vim.keymap.set({ "x", "o" }, "if", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+end, { desc = "Select inner function" })
+
+vim.keymap.set({ "x", "o" }, "ac", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+end, { desc = "Select outer class" })
+
+vim.keymap.set({ "x", "o" }, "ic", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+end, { desc = "Select inner class" })
+
+vim.keymap.set({ "x", "o" }, "il", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@loop.inner", "textobjects")
+end, { desc = "Select inner loop" })
+
+vim.keymap.set({ "x", "o" }, "al", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@loop.outer", "textobjects")
+end, { desc = "Select outer loop" })
