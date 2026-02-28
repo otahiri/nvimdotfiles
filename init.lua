@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -660,7 +660,7 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>cf',
         function() require('conform').format { async = true, lsp_format = 'fallback' } end,
         mode = '',
         desc = '[F]ormat buffer',
@@ -755,11 +755,9 @@ require('lazy').setup({
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         ['<CR>'] = {
           function(cmp)
-            if cmp.is_visible() then
-              return cmp.accept()
-            end
+            if cmp.is_visible() then return cmp.accept() end
           end,
-          'fallback'
+          'fallback',
         },
       },
 
@@ -867,6 +865,16 @@ require('lazy').setup({
       })
     end,
   },
+  {
+    'echasnovski/mini.icons',
+    version = false,
+    opts = {},
+    config = function(_, opts)
+      require('mini.icons').setup(opts)
+      -- This line "mocks" nvim-web-devicons so other plugins use mini.icons instead
+      require('mini.icons').mock_nvim_web_devicons()
+    end,
+  },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -917,5 +925,6 @@ require('lazy').setup({
 })
 require 'custom.configs.keymaps'
 require('mini.pairs').setup()
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
