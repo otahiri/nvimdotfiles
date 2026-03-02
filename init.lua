@@ -927,6 +927,7 @@ require('lazy').setup({
   },
 })
 require 'custom.configs.keymaps'
+require 'custom.configs.autocmd'
 require('mini.pairs').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
