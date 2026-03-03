@@ -929,6 +929,10 @@ require('lazy').setup({
 require 'custom.configs.keymaps'
 require 'custom.configs.autocmd'
 require('mini.pairs').setup()
+vim.lsp.set_log_level("error")  -- Reduce LSP verbosity
+-- Set timeout for LSP requests (in ms)
+vim.o.timeout = true
+vim.o.timeoutlen = 3000
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
