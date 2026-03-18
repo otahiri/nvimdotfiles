@@ -76,3 +76,43 @@ end, { desc = "Select inner loop" })
 vim.keymap.set({ "x", "o" }, "al", function()
   require("nvim-treesitter-textobjects.select").select_textobject("@loop.outer", "textobjects")
 end, { desc = "Select outer loop" })
+
+vim.keymap.set("n", "<leader>tr", function()
+    local themes = {
+			"everforest",
+			"iceberg",
+			"material-palenight",
+			"material-oceanic",
+			"material-deep-ocean",
+			"material-darker",
+			"rose-pine-moon",
+			"nord",
+			"nordfox",
+			"kanagawa",
+			"kanagawa-dragon",
+			"kanagawa-wave",
+			"WinterIsComing-dark-color-theme",
+			"WinterIsComing-dark-blue-color-theme",
+			"night-owl",
+			"thorn",
+			"thorn-dark-cold",
+			"thorn-dark-warm",
+			"leaf",
+			"cyberdream",
+			"omni",
+			"catppuccin",
+			"catppuccin-macchiato",
+			"catppuccin-frappe",
+			"gruber-darker",
+			"mountain",
+			"dracula",
+			"tokyodark",
+			"oxocarbon",
+			"nebulae",
+			"tokyonight-night",
+			"tokyonight-storm",
+		    }
+    local random_theme = themes[math.random(#themes)]
+    vim.cmd("colorscheme " .. random_theme)
+    print("Switched to: " .. random_theme)
+end, { desc = "Theme Reroll (Random)" })
