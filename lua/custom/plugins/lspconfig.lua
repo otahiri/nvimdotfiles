@@ -9,6 +9,7 @@ return {
     ---@class PluginLspOpts
     local ret = {
       servers = {
+    rust_analyzer = {},
         ['*'] = {
           keys = {
             { '<leader>cl', function() Snacks.picker.lsp_config() end, desc = 'Lsp Info' },
